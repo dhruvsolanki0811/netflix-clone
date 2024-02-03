@@ -1,14 +1,14 @@
 'use client'
 import React from 'react'
 import ShowsContainer from '@/components/ShowsContainer'
-import { useFetchNewMovies, usefetchPopularMovies } from '@/hooks/useMoviesData'
+import { useFetchNewMovies, useFetchPopularMovies } from '@/hooks/useMoviesData'
 import { CategorizedShows } from '@/types/type'
-import { usefetchPopularShows } from '@/hooks/useShowsData'
+import { useFetchPopularShows } from '@/hooks/useShowsData'
 import { shuffle } from '@/utils/utils'
 
-function page() {
-  const {data:popMovies}=usefetchPopularMovies()
-  const {data:popShows}=usefetchPopularShows()
+function Page() {
+  const {data:popMovies}=useFetchPopularMovies()
+  const {data:popShows}=useFetchPopularShows()
   const allcategoryshows:CategorizedShows[]=[
     
     {
@@ -28,4 +28,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

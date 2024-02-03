@@ -1,12 +1,12 @@
 'use client'
 import React from 'react'
 import ShowsContainer from '@/components/ShowsContainer'
-import { useFetchMovieByGenre, useFetchTopRatedMovies, usefetchTrendingMovies } from '@/hooks/useMoviesData';
+import { useFetchMovieByGenre, useFetchTopRatedMovies, useFetchTrendingMovies } from '@/hooks/useMoviesData';
 import { CategorizedShows } from '@/types/type';
 
 
-function page() {
-  const { data: trendingMovies } = usefetchTrendingMovies();
+function Page() {
+  const { data: trendingMovies } = useFetchTrendingMovies();
   const { data: topRatedMovies } = useFetchTopRatedMovies();
   const { data: actionMovies } = useFetchMovieByGenre("Action",28);
   const { data: comedyMovies } = useFetchMovieByGenre("Comedy",35);
@@ -54,4 +54,4 @@ function page() {
   );
 }
 
-export default page
+export default Page

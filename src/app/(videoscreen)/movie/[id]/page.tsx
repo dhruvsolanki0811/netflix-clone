@@ -12,7 +12,7 @@ import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 
-function page() {
+function Page() {
   const { id  } = useParams();
 
   const[movieId,setMovieId]=useState( Array.isArray(id) ? id[0] : id)  
@@ -86,4 +86,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

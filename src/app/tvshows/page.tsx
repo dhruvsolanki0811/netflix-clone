@@ -2,10 +2,10 @@
 
 import React from 'react'
 import ShowsContainer from '@/components/ShowsContainer'
-import { useFetchShowByGenre, useFetchTopRatedShows, usefetchTrendingShows } from '@/hooks/useShowsData';
+import { useFetchShowByGenre, useFetchTopRatedShows, useFetchTrendingShows } from '@/hooks/useShowsData';
 import {CategorizedShows} from '@/types/type'
-function page() {
-  const { data: trendingShows } = usefetchTrendingShows();
+function Page() {
+  const { data: trendingShows } = useFetchTrendingShows();
   const {data:topratedShows} =useFetchTopRatedShows()
   const { data: comedyShows } = useFetchShowByGenre("Comedy",35);
   const { data: aaShows } = useFetchShowByGenre("Action & Adventure",10759);
@@ -52,4 +52,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

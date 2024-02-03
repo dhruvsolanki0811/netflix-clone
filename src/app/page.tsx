@@ -1,10 +1,10 @@
 'use client'
 import ShowsContainer from "@/components/ShowsContainer";
-import { useFetchMovieByGenre, useFetchTopRatedMovies, usefetchTrendingMovies } from '@/hooks/useMoviesData';
+import { useFetchMovieByGenre, useFetchTopRatedMovies, useFetchTrendingMovies } from '@/hooks/useMoviesData';
 import { CategorizedShows } from "@/types/type";
 
 export default function Home() {
-  const { data: trendingMovies } = usefetchTrendingMovies();
+  const { data: trendingMovies } = useFetchTrendingMovies();
   const { data: topRatedMovies } = useFetchTopRatedMovies();
   const { data: actionMovies } = useFetchMovieByGenre("Action",28);
   const { data: comedyMovies } = useFetchMovieByGenre("Comedy",35);

@@ -18,7 +18,7 @@ import Link from "next/link";
 import ShowPlayer from "@/components/ShowPlayer";
 import SearchGrid from "@/components/SearchGrid";
 
-function page() {
+function Page() {
   const { id, season, episode:episodeNumber } = useParams();
   const { setQuery, query, shows: queryShows } = useSearchStore();
   const [ShowId, setShowId] = useState(Array.isArray(id) ? id[0] : id);
@@ -229,4 +229,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;

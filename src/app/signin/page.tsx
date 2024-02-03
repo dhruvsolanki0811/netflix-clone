@@ -7,7 +7,7 @@ import MovieTrailerModal from '@/components/MovieTrailerModal';
 import SearchImageCard from '@/components/SearchImageCard';
 import SearchGrid from '@/components/SearchGrid';
 
-function page() {
+function Page() {
   const {query,setQuery,shows:queryShows}=useSearchStore()
 const {open}=useModalStore()
   if (query.length > 0) {
@@ -33,4 +33,4 @@ const {open}=useModalStore()
   )
 }
 
-export default page
+export default Page

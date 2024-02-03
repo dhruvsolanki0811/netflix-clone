@@ -1,60 +1,52 @@
-import { Show } from "@/types/type";
-import axios from "axios";
-import { useQuery } from "react-query";
+import { Show } from '@/types/type';
+import axios from 'axios';
+import { useQuery } from 'react-query';
 
-const fetchTrendingShows = async () => {
+export const useFetchTrendingShows = () => {
+  const fetchTrendingShows = async () => {
     try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/trending/tv/day`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN_TMDB}`,
-          },
-        }
-      );
-  
+      const response = await axios.get(`https://api.themoviedb.org/3/trending/tv/day`, {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN_TMDB}`,
+        },
+      });
+
       const trendingShows: Show[] = response.data.results;
-      trendingShows.map(a=>a.media_type='tv')
+      trendingShows.forEach(show => (show.media_type = 'tv'));
       return trendingShows;
     } catch (error) {
-      throw new Error("Failed to fetch trending movies");
+      throw new Error('Failed to fetch trending movies');
     }
   };
-  
-  export const usefetchTrendingShows = () => {
-    return useQuery("Trending shows", fetchTrendingShows);
-  };
-  
-  
 
+  return useQuery('Trending shows', fetchTrendingShows);
+};
+
+export const useFetchTopRatedShows = () => {
   const fetchTopRatedShows = async () => {
     try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/tv/top_rated`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN_TMDB}`,
-          },
-        }
-      );
-  
-      const toprated: Show[] = response.data.results.map((movie: Show) => ({
-        ...movie,
-        media_type: "tv", // Adding the media_type property
+      const response = await axios.get(`https://api.themoviedb.org/3/tv/top_rated`, {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN_TMDB}`,
+        },
+      });
+
+      const topRatedShows: Show[] = response.data.results.map((show: Show) => ({
+        ...show,
+        media_type: 'tv',
       }));
-      return toprated;
+      return topRatedShows;
     } catch (error) {
-      throw new Error("Failed to fetch trending movies");
+      throw new Error('Failed to fetch top rated shows');
     }
   };
-  
-  export const useFetchTopRatedShows = () => {
-    return useQuery("Toprated shows", fetchTopRatedShows);
-  };
-  
 
-  const fetchShowByGenreId = async ({queryKey}:any) => {
-    const genreId = queryKey[2]
+  return useQuery('Toprated shows', fetchTopRatedShows);
+};
+
+export const useFetchShowByGenre = (genre: string, genreId: number) => {
+  const fetchShowByGenreId = async ({ queryKey }: any) => {
+    const genreId = queryKey[2];
     try {
       const response = await axios.get(
         `https://api.themoviedb.org/3/discover/tv?with_genres=${genreId}`,
@@ -64,42 +56,35 @@ const fetchTrendingShows = async () => {
           },
         }
       );
-      const listOfshows: Show[] = response.data.results.map((show: Show) => ({
+      const listOfShows: Show[] = response.data.results.map((show: Show) => ({
         ...show,
-        media_type: "tv", // Adding the media_type property
+        media_type: 'tv',
       }));
-      return listOfshows;
+      return listOfShows;
     } catch (error) {
-      throw new Error("Failed to fetch trending movies");
+      throw new Error('Failed to fetch shows by genre');
     }
   };
-  
-  export const useFetchShowByGenre = (genre:string,genreId:number) => {
-    return useQuery(["Show",genre ,genreId], fetchShowByGenreId);
-  };
 
+  return useQuery(['Show', genre, genreId], fetchShowByGenreId);
+};
 
+export const useFetchPopularShows = () => {
   const fetchPopularShows = async () => {
     try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/tv/popular`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN_TMDB}`,
-          },
-        }
-      );
-  
+      const response = await axios.get(`https://api.themoviedb.org/3/tv/popular`, {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN_TMDB}`,
+        },
+      });
+
       const popularShows: Show[] = response.data.results;
-      popularShows.map(a=>a.media_type='tv')
+      popularShows.forEach(show => (show.media_type = 'tv'));
       return popularShows;
     } catch (error) {
-      throw new Error("Failed to fetch trending movies");
+      throw new Error('Failed to fetch popular shows');
     }
   };
-  
-  export const usefetchPopularShows = () => {
-    return useQuery("Popular shows", fetchPopularShows);
-  };
-  
-  
+
+  return useQuery('Popular shows', fetchPopularShows);
+};
