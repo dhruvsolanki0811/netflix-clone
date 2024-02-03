@@ -1,9 +1,11 @@
 'use client'
-import ShowsContainer from "@/components/ShowsContainer";
+import React from 'react'
+import ShowsContainer from '@/components/ShowsContainer'
 import { useFetchMovieByGenre, useFetchTopRatedMovies, usefetchTrendingMovies } from '@/hooks/useMoviesData';
-import { CategorizedShows } from "@/types/type";
+import { CategorizedShows } from '@/types/type';
 
-export default function Home() {
+
+function page() {
   const { data: trendingMovies } = usefetchTrendingMovies();
   const { data: topRatedMovies } = useFetchTopRatedMovies();
   const { data: actionMovies } = useFetchMovieByGenre("Action",28);
@@ -12,8 +14,8 @@ export default function Home() {
   // const { data: romanceMovies } = useFetchMovieByGenre("Romance",10749);
   // const { data: crimeMovies } = useFetchMovieByGenre("Crime",80);
   const { data: documentaryMovies } = useFetchMovieByGenre("Documentary",99);
-  const { data: horrorMovies } = useFetchMovieByGenre("Horror",27);
-  const { data: animatedMovies } = useFetchMovieByGenre("Animated",16);
+  // const { data: horrorMovies } = useFetchMovieByGenre("Horror",27);
+  // const { data: animatedMovies } = useFetchMovieByGenre("Animated",16);
   
       const allShowsByCategory: CategorizedShows[] = [
         {
@@ -40,14 +42,7 @@ export default function Home() {
           title: "Documentaries",
           shows: documentaryMovies || []
         },
-        {
-          title: "Horrors",
-          shows: horrorMovies || []
-        },
-        {
-          title: "Animated Movies",
-          shows: animatedMovies || []
-        },
+        
         
       ];
  
@@ -58,3 +53,5 @@ export default function Home() {
     </>
   );
 }
+
+export default page

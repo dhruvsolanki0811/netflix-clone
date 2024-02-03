@@ -1,18 +1,26 @@
 import { useModalStore } from "@/store/modalStore";
+import { Show } from "@/types/type";
 import Image from "next/image";
 import React from "react";
 
-function SearchImageCard() {
-  const {setOpen}=useModalStore()
+function SearchImageCard({show}:{show:Show}) {
+  const {setOpen,setShow}=useModalStore()
+  // if(!show?.poster_path && !show?.backdrop_path){
+  //   return <></>
+  // }
   return (
     <>
-      <div onClick={()=>setOpen(true)} className="card-container cursor-pointer h-[6rem] hover:scale-110 relative bg-white text-black">
+      <div onClick={()=>{setOpen(true)
+      setShow(show)
+      }} className="card-container cursor-pointer h-[7rem] hover:scale-110 relative bg- text-black border-none">
         <Image
           src={
-            "https://image.tmdb.org/t/p/w500//uIk2g2bRkNwNywKZIhC5oIU94Kh.jpg"
+            show?.backdrop_path?
+            `https://image.tmdb.org/t/p/w500/${show?.backdrop_path}`:
+            `https://image.tmdb.org/t/p/w500/${show?.poster_path}`
           }
           fill
-          alt="card"
+          alt=""
           style={{objectFit:"cover"}}
           />
       </div>

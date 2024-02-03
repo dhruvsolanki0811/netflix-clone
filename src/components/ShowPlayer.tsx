@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react'
 import ReactPlayer from 'react-player'
 
-function MoviePlayer({imdb}:{imdb:string|number}) {
+function ShowPlayer({imdb,season,episode}:{imdb:string|number,season:string|number,episode:string|number}) {
        
       
   return (
@@ -11,12 +11,11 @@ function MoviePlayer({imdb}:{imdb:string|number}) {
     <div
         className="player-wrapper  w-[70vw] h-[60vh]"
       >
-        {/* <div className="bg-white w-full h-full"></div> */}
-       <iframe src={`https://vidsrc.xyz/embed/movie/${imdb}`} allowFullScreen className=' w-full h-full' ></iframe>
+       <iframe src={`https://vidsrc.xyz/embed/tv/${imdb}/${season}-${episode}`} allowFullScreen className=' w-full h-full' ></iframe>
       </div>
       </div>
     </>
   )
 }
 
-export default MoviePlayer
+export default ShowPlayer

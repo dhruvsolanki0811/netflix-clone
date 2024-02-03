@@ -1,47 +1,61 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "@/components/Carousel";
-import Navbar from "@/components/Navbar";
 import { usePathname } from "next/navigation";
 import Banner from "./Banner";
 import { useSearchStore } from "@/store/searchstore";
-import SearchImageCard from "./SearchImageCard";
 import MovieTrailerModal from "@/components/MovieTrailerModal";
 import { useModalStore } from "@/store/modalStore";
+import { CategorizedShows } from "@/types/type";
+import { getRandomInt } from "@/utils/utils";
+import SearchGrid from "./SearchGrid";
 
-function ShowsContainer() {
+function ShowsContainer({
+  categorizedShows
+}: {
+  categorizedShows: CategorizedShows[];
+}) {
   const { open } = useModalStore();
-  const { query,setQuery } = useSearchStore();
-  useEffect(()=>{
-    setQuery("")
-  },[])
+  const { query, shows: queryShows, setQuery } = useSearchStore();
+  const [randomInt, setRandomInt] = useState<number>(getRandomInt(15));
+
+  useEffect(() => {
+    setQuery("");
+  }, []);
+
+  
+
+
   const path = usePathname();
   if (query.length > 0) {
     return (
       <>
-        {open && <MovieTrailerModal></MovieTrailerModal>}
-
-        <div className="show-grid grid grid-cols-5	gap-x-1 gap-y-6 ps-[4rem] pe-[4rem] pt-[1rem]">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((a,i) => (
-            <SearchImageCard key={i}></SearchImageCard>
-          ))}
-        </div>
+       <SearchGrid/>
       </>
     );
   }
   return (
     <>
       {open && <MovieTrailerModal></MovieTrailerModal>}
+      {(
+        categorizedShows.length>0 && categorizedShows[0].shows.length>0 
+      ) && (
+          <>
+            {path == "/" && (
+              <>
+                <Banner show={categorizedShows[0].shows[randomInt]}></Banner>
+              </>
+            )}
 
-      {path == "/" && (
-        <>
-          <Banner></Banner>
-        </>
-      )}
-      <Carousel></Carousel>
-      <Carousel></Carousel>
-      <Carousel></Carousel>
-      <Carousel></Carousel>
+            {categorizedShows.map((categorizedShow, index) => (
+              <Carousel
+                key={index}
+                shows={categorizedShow.shows}
+                title={categorizedShow.title}
+              ></Carousel>
+            ))}
+          </>
+        )}
     </>
   );
 }

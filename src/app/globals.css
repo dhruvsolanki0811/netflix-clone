@@ -31,7 +31,7 @@
   text-overflow: ellipsis;
   -webkit-line-clamp: 3; /* Number of lines to show */
   /* Optionally, you can also set fixed height or max-height for better control */
-  /* max-height: 3em; */
+  max-height: 4.1em;
 }
 
 .two-line-ellipsis {
@@ -63,7 +63,7 @@
     max-width: 80vh;
   }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 710px) {
   .nav-links{
     display: none;
   }
@@ -98,7 +98,10 @@
     justify-self: center;
     grid-column: span 5 / span 5;
   }
- 
+  .movie-info{
+    justify-self: center;
+    grid-column: span 5 / span 5;
+  }
 }
 
 @media only screen and (max-width: 460px) {
@@ -107,5 +110,39 @@
   }
   .movie-info {
     max-width: 100vh;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .search-grid{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    ;
+  }
+  
+}
+@media only screen and (max-width: 800px) {
+  .search-grid{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    ;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .search-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .search-grid{
+    /* grid-template-columns: repeat(2, minmax(0, 1fr)); */
+    padding-inline-start: 1rem;
+    padding-inline-end: 1rem;
+  }}
+@media only screen and (max-width: 310px) {
+  .search-grid{
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    /* padding-inline-start: 1rem;
+    padding-inline-end: 1rem; */
   }
 }
