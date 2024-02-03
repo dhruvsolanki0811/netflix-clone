@@ -272,16 +272,16 @@ const Navbar = () => {
                 />
               )}
             </div>
-            <Link
+            <div
               onClick={() => {
                 setQuery("");
                 setShows([]);
               }}
-              href={"/signin"}
+              // href={"/signin"}
               className="account text-[11px] font-semibold flex items-center justify-center rounded-[4px] bg-[var(--netflix-font-red)] pt-1 pb-1 ps-2 pe-2 cursor-pointer hover:bg-[#c61414]"
             >
               Signin
-            </Link>
+            </div>
           </div>
         </div>
       </div>
