@@ -18,8 +18,8 @@ import { MdLocalMovies } from "react-icons/md";
 
 import { useSearchStore } from "@/store/searchstore";
 import Image from "next/image";
-import fulllogo from "../../public/assets/FullLogo.png";
-import smalllogo from "../../public/assets/smalllogo.png";
+import fulllogo from "@/assets/fulllogo.png";
+import smalllogo from "@/assets/smalllogo.png";
 import axios from "axios";
 import { Show } from "@/types/type";
 import { useQuery } from "react-query";
