@@ -89,7 +89,7 @@ function Page() {
         <ShowPlayer imdb={ShowId} season={parsedSeason} episode={parsedEpisodeNumber}></ShowPlayer>
         <div className="movie-info-container grid grid-cols-5	pt-8 mb-8">
           <div className="thumbnail-container flex flex-col font-bold justify-start items-end ">
-            <Image
+            <img
               style={{
                 boxShadow: "19px 11px 15px -3px rgba(0,0,0,41%)",
               }}
@@ -98,7 +98,7 @@ function Page() {
               height={100}
               alt=""
               className="hover:scale-110 cursor-pointer"
-            ></Image>
+            />
           </div>
 
           <div className="movie-info col-span-4 flex flex-col  gap-2   ms-[2.5rem] me-[2.5rem]">
@@ -193,7 +193,7 @@ function Page() {
                   <div className="image-container w-full  h-[10vh] flex gap-2 justify-center relative ps-2 pe-2 overflow-hidden">
                     <div className="number flex h-full  ">
                       {episode.episode_number}</div>
-                    <Image
+                    <img
                       style={{
                         objectFit: "cover",
                         boxShadow: "19px 11px 15px -3px rgba(0,0,0,41%)",
@@ -203,7 +203,7 @@ function Page() {
                       height={100}
                       alt=""
                       className="hover:scale-110 cursor-pointer"
-                    ></Image>
+                    />
                   </div>
                 </div>
                 <div className="episode-info col-span-5 flex flex-col p-3 ">

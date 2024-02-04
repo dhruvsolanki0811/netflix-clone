@@ -15,14 +15,14 @@ function CarouselCard({show}:{show:Show}) {
         }}
         className="card-container cursor-pointer min-w-[9rem] h-[9rem] relative  text-black  transition-all	 hover:scale-110 "
       >
-        <Image
+        <img
           src={
             `https://image.tmdb.org/t/p/original/${show.poster_path}`
           }
-          fill
+          
           sizes="inherit"
           alt="card"
-          style={{objectFit:"fill"}}
+          style={{objectFit:"fill",width:"100%",height:"100%",position:"absolute"}}
           />
       </div>
 

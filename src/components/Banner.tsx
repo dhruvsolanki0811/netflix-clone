@@ -38,14 +38,14 @@ function Banner({show}:{show:Show}) {
         </div>
         <div className="banner-inset absolute inset-0 -z-10 ">
           <div className="banner-img-container w-full h-full relative">
-            <Image
-              style={{objectFit:"cover"}}
+            <img
+              style={{objectFit:"cover",width:"100%",height:"100%",position:"absolute"}}
               src={
                 `https://image.tmdb.org/t/p/original/${show?.backdrop_path}`
               }
               alt=""
-              fill
-            ></Image>
+              
+            />
           </div>
         </div>
         <div className="black-shade  absolute inset-0  w-full h-full -z-[5] 

@@ -16,15 +16,15 @@ function SearchImageCard({show}:{show:Show}) {
       <div onClick={()=>{setOpen(true)
       setShow(show)
       }} className="card-container cursor-pointer h-[7rem] hover:scale-110 relative bg- text-black border-none">
-        <Image
+        <img
           src={
             show?.backdrop_path?
             `https://image.tmdb.org/t/p/w500/${show?.backdrop_path}`:
             `https://image.tmdb.org/t/p/w500/${show?.poster_path}`
           }
-          fill
+          
           alt=""
-          style={{objectFit:"cover"}}
+          style={{objectFit:"cover",width:"100%",height:"100%",position:"absolute"}}
           />
       </div>
     </>

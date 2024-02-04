@@ -41,7 +41,7 @@ function Page() {
       <MoviePlayer imdb={movieId}></MoviePlayer>
       <div className="movie-info-container grid grid-cols-5	pt-8 mb-8">
         <div className="thumbnail-container flex flex-col font-bold justify-start items-end ">
-          <Image
+          <img
             style={{
               boxShadow: "19px 11px 15px -3px rgba(0,0,0,41%)",
             }}
@@ -52,7 +52,7 @@ function Page() {
             height={100}
             alt=""
             className="hover:scale-110 cursor-pointer"
-          ></Image>
+          />
         </div>
 
         <div className="movie-info col-span-4 flex flex-col  gap-2   ms-[2.5rem] me-[2.5rem]">
