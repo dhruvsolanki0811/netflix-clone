@@ -8,6 +8,9 @@ function SearchImageCard({show}:{show:Show}) {
   // if(!show?.poster_path && !show?.backdrop_path){
   //   return <></>
   // }
+  console.log(show?.backdrop_path?
+    `https://image.tmdb.org/t/p/w500/${show?.backdrop_path}`:
+    `https://image.tmdb.org/t/p/w500/${show?.poster_path}`)
   return (
     <>
       <div onClick={()=>{setOpen(true)
