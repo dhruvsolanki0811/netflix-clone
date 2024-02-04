@@ -11,27 +11,27 @@ function Banner({show}:{show:Show}) {
     <>
     <div className="banner w-full h-100 ">
         <div className="movie-info flex flex-col gap-2 max-w-[50vw]  mt-[4rem] mb-[3.4rem]  ms-[2.5rem] me-[2.5rem]">
-          <div className="movie-title text-[1.6rem] font-extrabold">
+          <div className="movie-title text-[1.9rem] font-extrabold">
           {show?.title?show.title:(show?.name?show.name:(show?.original_title?show.original_title:"N/A"))}
           </div>
           <div className="popularity-tab flex flex-nowrap	 gap-2 justify-cener items-center">
-            <div className="popularity text-[#16A34A] text-xs font-medium	 ">
+            <div className="popularity text-[#16A34A] text-sm font-medium	 ">
               {show?.vote_average} Average Votes
             </div>
-            <div className="popularity text-xs font-medium">{show?.release_date}</div>
+            <div className="popularity text-sm font-medium">{show?.release_date}</div>
           </div>
-          <div className="movie-title text-xs text-justify multi-line-ellipsis">
+          <div className="movie-title text-sm text-justify multi-line-ellipsis">
             {show?.overview}
           
           </div>
           <div className="banner-play flex gap-1">
-            <div className="play-btn cursor-pointer text-[11px] flex pt-1 pb-1 ps-3 pe-3 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white">
-              <FaPlay className="text-[10px]"></FaPlay>
+            <div className="play-btn cursor-pointer text-[14px] flex pt-1 pb-1 ps-3 pe-3 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white">
+              <FaPlay className="text-[12px]"></FaPlay>
               Watch
             </div>
             <div onClick={()=>{setOpen(true)
-            setShow(show)}} className="play-btn cursor-pointer text-[11px] flex flex-nowrap pt-1 pb-1 ps-3 pe-3 gap-1 justify-center items-center font-bold  mt-2 text-black bg-transparent text-white rounded-[3px] border-[1px] border-solid border-[var(--border-btn)] hover:bg-[var(--border-btn)]">
-              <FaInfoCircle className="text-[12px] "></FaInfoCircle>
+            setShow(show)}} className="play-btn cursor-pointer text-[14px] flex flex-nowrap pt-1 pb-1 ps-3 pe-3 gap-1 justify-center items-center font-bold  mt-2 text-black bg-transparent text-white rounded-[3px] border-[1px] border-solid border-[var(--border-btn)] hover:bg-[var(--border-btn)]">
+              <FaInfoCircle className="text-[14px] "></FaInfoCircle>
               More Info
             </div>
           </div>
@@ -52,9 +52,7 @@ function Banner({show}:{show:Show}) {
         bg-black/60 bg-gradient-to-b from-neutral-900/10 to-neutral-900 
         "></div>
       </div>
-      {/* <div className="placeholder placeholder-1 pt-2 ">
-        <Carousel></Carousel>
-      </div> */}
+      
     </>
   )
 }

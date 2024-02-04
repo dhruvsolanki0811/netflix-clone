@@ -116,11 +116,11 @@ const Navbar = () => {
     <>
       <div
         className={twMerge(
-          "header h-[3rem] w-full  sticky top-0 z-[100]",
+          "header h-[4rem] w-full  sticky top-0 z-[100]",
           isScrolled ? "bg-[#171717]" : "bg-transparent"
         )}
       >
-        <div className="nav-container flex justify-between   ps-[3rem] pe-[3rem]  pt-[0.1rem] pb-[0.5rem] font-bold	text-[1rem]">
+        <div className="nav-container flex justify-between   ps-[3rem] pe-[3rem]  pt-[0.1rem] pb-[0.5rem] font-bold	text-[2rem]">
           <div className="logo-menu-container flex justify-center items-center flex-nowrap gap-2">
             <Link
               href={"/"}
@@ -128,7 +128,7 @@ const Navbar = () => {
                 setQuery("");
                 setShows([]);
               }}
-              className="relative nav-items w-[6rem] h-[3rem] full-logo cursor-pointer "
+              className="relative nav-items w-[7.5rem] h-[4.5rem] full-logo cursor-pointer "
             >
               <Image src={fulllogo} fill alt=""></Image>
             </Link>
@@ -137,9 +137,8 @@ const Navbar = () => {
               onClick={() => setMenu(!menu)}
               className="relative  flex justify-center items-center gap-2  cursor-pointer hover:bg-[#1c1c1c] rounded-[10px] p-1 "
             >
-              <Link
-                href={"/"}
-                className="relative w-[1.6rem] h-[1.6rem] nav-items small-logo  hidden cursor-pointer "
+              <div
+                className="relative w-[2.5rem] h-[2.5rem] nav-items small-logo  hidden cursor-pointer "
                 onClick={() => {
                   setQuery("");
                   setShows([]);
@@ -147,7 +146,7 @@ const Navbar = () => {
               >
                 <Image src={smalllogo} fill alt=""></Image>
                 {menu && (
-                  <div ref={menuRef} className="absolute text-xs rounded-[4px] border-[1px] p-1 flex flex-col flex-nowrap gap-1 small-logo hidden bg-[rgb(38,38,38)] mt-[2.3rem]  w-[8rem] ">
+                  <div ref={menuRef} className="absolute text-xs rounded-[4px] border-[1px] p-1 flex flex-col flex-nowrap gap-1 small-logo hidden bg-[rgb(38,38,38)] mt-[3rem]  w-[10rem] ">
                     <Link
                       onClick={() => {
                         setQuery("");
@@ -156,8 +155,8 @@ const Navbar = () => {
                       href={"/"}
                       className="w-full flex items-center gap-1  hover:bg-[#647080] pt-1 pb-1"
                     >
-                      <IoMdHome className="text-sm"></IoMdHome>
-                      <div className="nav-link cursor-pointer ">Home</div>
+                      <IoMdHome className="text-[1.1rem]"></IoMdHome>
+                      <div className="nav-link cursor-pointer text-[0.9rem]">Home</div>
                     </Link>
                     <Link
                       onClick={() => {
@@ -167,8 +166,8 @@ const Navbar = () => {
                       href={"/tvshows"}
                       className="w-full flex items-center gap-1 hover:bg-[#647080] pt-1 pb-1"
                     >
-                      <PiTelevisionSimpleFill className="text-sm"></PiTelevisionSimpleFill>
-                      <div className="nav-link cursor-pointer ">TV Shows</div>
+                      <PiTelevisionSimpleFill className="text-[1.1rem]"></PiTelevisionSimpleFill>
+                      <div className="nav-link cursor-pointer text-[0.9rem]">TV Shows</div>
                     </Link>
                     <Link
                       onClick={() => {
@@ -176,10 +175,10 @@ const Navbar = () => {
                         setShows([]);
                       }}
                       href={"/movies"}
-                      className="w-full  flex items-center gap-1 hover:bg-[#647080] pt-1 pb-1"
+                      className="w-full  flex items-center gap-1  hover:bg-[#647080] pt-1 pb-1"
                     >
-                      <MdLocalMovies className="text-sm"></MdLocalMovies>
-                      <div className="nav-link cursor-pointer ">Movies</div>
+                      <MdLocalMovies className="text-[1.1rem]"></MdLocalMovies>
+                      <div className="nav-link cursor-pointer text-[0.9rem]">Movies</div>
                     </Link>
                     <Link
                       onClick={() => {
@@ -189,20 +188,20 @@ const Navbar = () => {
                       href={"/new&popular"}
                       className="w-full flex items-center gap-1 hover:bg-[#647080] pt-1 pb-1"
                     >
-                      <AiOutlineRise className="text-sm"></AiOutlineRise>
-                      <div className="nav-link cursor-pointer ">
+                      <AiOutlineRise className="text-[1.1rem]"></AiOutlineRise>
+                      <div className="nav-link cursor-pointer text-[0.9rem] ">
                         New & Popular
                       </div>
                     </Link>
                   </div>
                 )}
-              </Link>
-              <div className="small-logo relative  menu-text nav-items  hidden text-xs">
+              </div>
+              <div className="small-logo relative  menu-text nav-items  hidden text-[1rem]">
                 Menu
               </div>
             </div>
 
-            <div className="nav-items nav-links flex gap-3 text-[11px] font-semibold">
+            <div className="nav-items nav-links flex gap-3 text-[14px] font-semibold">
               <Link
                 onClick={() => {
                   setQuery("");
@@ -250,7 +249,7 @@ const Navbar = () => {
             <div
               ref={searchIconRef}
               className={twMerge(
-                "search-icon text-[1rem] cursor-pointer  flex  items-center flex-nowrap  gap-2 ps-1 pe-1",
+                "search-icon text-[1.4  rem] cursor-pointer  flex  items-center flex-nowrap  gap-2 ps-1 pe-1",
                 showSearchBox && "border-white border-solid border-[1px]"
               )}
             >
@@ -268,20 +267,20 @@ const Navbar = () => {
                   placeholder="Search"
                   value={query}
                   onChange={handleSearchChange}
-                  className="search-input-container bg-transparent outline-none  w-[10rem] h-[1.5rem] font-light text-[0.7rem] text-white flex items-center"
+                  className="search-input-container bg-transparent outline-none  w-[10rem] h-[1.9rem] font-light text-[1rem] text-white flex items-center"
                 />
               )}
             </div>
-            <div
+            <Link
               onClick={() => {
                 setQuery("");
                 setShows([]);
               }}
-              // href={"/signin"}
-              className="account text-[11px] font-semibold flex items-center justify-center rounded-[4px] bg-[var(--netflix-font-red)] pt-1 pb-1 ps-2 pe-2 cursor-pointer hover:bg-[#c61414]"
+              href={"/login"}
+              className="account text-[14px] font-semibold flex items-center justify-center rounded-[4px] bg-[var(--netflix-font-red)] pt-1 pb-1 ps-2 pe-2 cursor-pointer hover:bg-[#c61414]"
             >
               Signin
-            </div>
+            </Link>
           </div>
         </div>
       </div>
