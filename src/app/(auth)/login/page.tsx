@@ -5,6 +5,7 @@ import React from "react";
 import { FaGoogle } from "react-icons/fa";
 import { signIn } from "next-auth/react"
 import {WithoutAuth} from "@/components/HOC/WithoutAuth"
+import { FcGoogle } from "react-icons/fc";
 function Page() {
   const { query } = useSearchStore();
   if (query.length > 0) {
@@ -16,7 +17,7 @@ function Page() {
         <div className="sigin-btn-container  rounded-[4px] flex flex-col justify-center items-center gap-10 bg-[#1F1F1F] p-10">
           <div className="signin-header font-semibold ">Signin</div>
           <div onClick={()=>signIn("google")}className="btn flex flex-row justify-center items-center gap-2  text-white font-semibold rounded-[4px] bg-[var(--netflix-font-red)] pt-1 pb-1 ps-2 pe-2 cursor-pointer hover:bg-[#c61414]">
-            <FaGoogle />
+            <FcGoogle />
             Google
           </div>
         </div>

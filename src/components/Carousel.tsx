@@ -1,5 +1,6 @@
 "use client"
 import React, { useRef, useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import Image from "next/image";
 import CarouselCard from "./CarouselCard";
@@ -34,10 +35,10 @@ const Carousel = ({shows,title}:{title:string,shows:Show[]}) => {
         {showBtn &&  <>
         
             <div  onClick={() => scrollToDirection("left")} className="btn-scroll-right rounded-r-[10px] border-[1px] border-solid border-white cursor-pointer flex justify-center items-center font-bold text-xl h-full w-[50px] bg-black bg-opacity-50 h-[8rem] absolute z-[50] ">
-              &lt;
+              <FaChevronLeft></FaChevronLeft>
             </div>
             <div  onClick={() => scrollToDirection("right")} className="btn-scroll-right rounded-l-[10px] border-[1px] border-solid border-white cursor-pointer flex justify-center items-center font-bold text-xl h-full w-[50px] bg-black bg-opacity-50 h-[8rem] absolute z-[50] right-0 ">
-              &gt;
+              <FaChevronRight></FaChevronRight>
             </div>
           </>}
           <div ref={showsRef} className="carousel-container  no-scrollbar flex gap-2 overflow-x-auto overflow-y-hidden no-scrollbar">

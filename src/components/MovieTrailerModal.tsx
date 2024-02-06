@@ -13,7 +13,11 @@ import { useFetchMovieTrailer } from "@/hooks/useTrailerData";
 import { IoMdAdd } from "react-icons/io";
 import { FaCheck } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
-import { useAddFavShow, useFetchFavShowStatus, useRemoveFavShow } from "@/hooks/useFavShowsData";
+import {
+  useAddFavShow,
+  useFetchFavShowStatus,
+  useRemoveFavShow,
+} from "@/hooks/useFavShowsData";
 import { useSession } from "next-auth/react";
 
 function MovieTrailerModal() {
@@ -30,7 +34,7 @@ function MovieTrailerModal() {
     String(show?.id)
   );
   const { mutate: addFavShow } = useAddFavShow(String(show?.id));
-  const {mutate:removeShow} =useRemoveFavShow(String(show?.id))
+  const { mutate: removeShow } = useRemoveFavShow(String(show?.id));
   const { status: authStatus } = useSession();
   const modalRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLDivElement>(null);
@@ -110,7 +114,14 @@ function MovieTrailerModal() {
                         )}
                       </div>
 
-                      {statusLoading ? (
+                      {authStatus == "unauthenticated" ? (
+                        <Link
+                          href={"/login"}
+                          className="add-btn cursor-pointer text-[14px] rounded-full  flex pt-1 pb-1 ps-2 pe-2 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white"
+                        >
+                          <MdAdd className="text-[14px]" />
+                        </Link>
+                      ) : statusLoading ? (
                         <div className="add-btn cursor-pointer text-[14px] rounded-full  flex pt-1 pb-1 ps-2 pe-2 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white">
                           <MdAdd className="text-[14px]" />
                         </div>
@@ -120,12 +131,30 @@ function MovieTrailerModal() {
                             if (authStatus == "authenticated") {
                               addFavShow({
                                 id: show?.id ? String(show.id) : "",
-                                media_type:show?.media_type?show.media_type:"movie",
-                                overview:show?.overview?show.overview:"",
-                                poster_path:show?.poster_path?show.poster_path:(show?.backdrop_path?show?.backdrop_path:""),
-                                release_date:show?.release_date? show.release_date: show?.first_air_date? show.first_air_date: show?.last_air_date?show.last_air_date:"",
-                                title:show?.title? show.title: show?.name? show.name: show?.original_title? show.original_title: "N/A",
-                                vote_average:show?.vote_average
+                                media_type: show?.media_type
+                                  ? show.media_type
+                                  : "movie",
+                                overview: show?.overview ? show.overview : "",
+                                poster_path: show?.poster_path
+                                  ? show.poster_path
+                                  : show?.backdrop_path
+                                  ? show?.backdrop_path
+                                  : "",
+                                release_date: show?.release_date
+                                  ? show.release_date
+                                  : show?.first_air_date
+                                  ? show.first_air_date
+                                  : show?.last_air_date
+                                  ? show.last_air_date
+                                  : "",
+                                title: show?.title
+                                  ? show.title
+                                  : show?.name
+                                  ? show.name
+                                  : show?.original_title
+                                  ? show.original_title
+                                  : "N/A",
+                                vote_average: show?.vote_average,
                               });
                             }
                           }}
@@ -134,11 +163,14 @@ function MovieTrailerModal() {
                           <MdAdd className="text-[14px]" />
                         </div>
                       ) : (
-                        <div onClick={()=>{
-                          if(authStatus=='authenticated'){
-                            removeShow(String(show?.id))
-                          }
-                        }} className="add-btn cursor-pointer text-[14px] rounded-full  flex pt-1 pb-1 ps-2 pe-2 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white">
+                        <div
+                          onClick={() => {
+                            if (authStatus == "authenticated") {
+                              removeShow(String(show?.id));
+                            }
+                          }}
+                          className="add-btn cursor-pointer text-[14px] rounded-full  flex pt-1 pb-1 ps-2 pe-2 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white"
+                        >
                           <FaCheck className="text-[14px]" />
                         </div>
                       )}
