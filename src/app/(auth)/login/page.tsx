@@ -4,7 +4,7 @@ import { useSearchStore } from "@/store/searchstore";
 import React from "react";
 import { FaGoogle } from "react-icons/fa";
 import { signIn } from "next-auth/react"
-
+import {WithoutAuth} from "@/components/HOC/WithoutAuth"
 function Page() {
   const { query } = useSearchStore();
   if (query.length > 0) {
@@ -25,4 +25,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default WithoutAuth(Page);

@@ -28,7 +28,6 @@ function Page() {
   const { data: show, isLoading } = useFetchSingleShow(ShowId);
 
   const onSuccess = (data: Season) => {
-    console.log(data);
     if (data) {
       setSeasons((prevSeasons) => {
         const updatedSeasons = new Map(prevSeasons);
@@ -83,7 +82,6 @@ function Page() {
   }
 
   if (seasons)
-  console.log(seasons)
     return (
       <>
         <ShowPlayer imdb={ShowId} season={parsedSeason} episode={parsedEpisodeNumber}></ShowPlayer>

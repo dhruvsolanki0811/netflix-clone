@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FaPlay, FaInfoCircle } from "react-icons/fa";
 import { useModalStore } from '@/store/modalStore';
 import { Show } from '@/types/type';
+import Link from 'next/link';
 function Banner({show}:{show:Show}) {
   const {setOpen,setShow}=useModalStore()
   return (
@@ -25,10 +26,15 @@ function Banner({show}:{show:Show}) {
           
           </div>
           <div className="banner-play flex gap-1">
-            <div className="play-btn cursor-pointer text-[14px] flex pt-1 pb-1 ps-3 pe-3 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white">
+            <Link
+                href={
+                  show?.id && show?.media_type == "tv"
+                    ? `/tvshow/${show.id}/1/1`
+                    : `/movie/${show?.id}`
+                } className="play-btn cursor-pointer text-[14px] flex pt-1 pb-1 ps-3 pe-3 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white">
               <FaPlay className="text-[12px]"></FaPlay>
               Watch
-            </div>
+            </Link>
             <div onClick={()=>{setOpen(true)
             setShow(show)}} className="play-btn cursor-pointer text-[14px] flex flex-nowrap pt-1 pb-1 ps-3 pe-3 gap-1 justify-center items-center font-bold  mt-2 text-black bg-transparent text-white rounded-[3px] border-[1px] border-solid border-[var(--border-btn)] hover:bg-[var(--border-btn)]">
               <FaInfoCircle className="text-[14px] "></FaInfoCircle>

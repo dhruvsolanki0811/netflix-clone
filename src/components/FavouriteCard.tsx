@@ -3,14 +3,14 @@ import { Show } from "@/types/type";
 import Image from "next/image";
 import React from "react";
 
-function SearchImageCard({show}:{show:Show}) {
+function FavouriteCard({show}:{show:Show}) {
   const {setOpen,setShow}=useModalStore()
   
   return (
     <>
       <div onClick={()=>{setOpen(true)
       setShow(show)
-      }} className="card-container cursor-pointer h-[7rem] hover:scale-110 relative bg- text-black border-none">
+      }} className="card-container cursor-pointer h-[11rem] hover:scale-110 relative bg- text-black border-none">
         <img
           src={
             show?.backdrop_path?
@@ -26,4 +26,4 @@ function SearchImageCard({show}:{show:Show}) {
   );
 }
 
-export default SearchImageCard;
+export default FavouriteCard;

@@ -23,6 +23,7 @@ import smalllogo from "@/assets/smalllogo.png";
 import axios from "axios";
 import { Show } from "@/types/type";
 import { useQuery } from "react-query";
+import { signOut, useSession } from "next-auth/react";
 
 const searchQuery = async ({ queryKey }: any) => {
   const query = queryKey[1];
@@ -57,6 +58,7 @@ const Navbar = () => {
   const [menu, setMenu] = useState(false);
   const { setQuery, query, setShows } = useSearchStore();
   let typingTimeout: NodeJS.Timeout;
+  const { data: session, status } = useSession()
 
   useEffect(() => {
     const changeBgColor = () => {
@@ -242,6 +244,16 @@ const Navbar = () => {
               >
                 New & Popular
               </Link>
+              <Link
+                onClick={() => {
+                  setQuery("");
+                  setShows([]);
+                }}
+                href={"/mylist"}
+                className="nav-link cursor-pointer hover:text-[#647080]"
+              >
+                My List
+              </Link>
             </div>
           </div>
 
@@ -249,21 +261,19 @@ const Navbar = () => {
             <div
               ref={searchIconRef}
               className={twMerge(
-                "search-icon text-[1.4  rem] cursor-pointer  flex  items-center flex-nowrap  gap-2 ps-1 pe-1",
+                "search-icon text-[1.4rem] cursor-pointer  flex  items-center flex-nowrap  gap-2 ps-1 pe-1",
                 showSearchBox && "border-white border-solid border-[1px]"
               )}
             >
               <IoSearch
                 onClick={() => {
-                  setShowSearchBox(true);
-                  if (inputRef.current) {
-                    inputRef.current.focus();
-                  }
+                  setShowSearchBox(true);  
                 }}
               />
               {showSearchBox && (
                 <input
                   ref={inputRef}
+                  autoFocus
                   placeholder="Search"
                   value={query}
                   onChange={handleSearchChange}
@@ -271,7 +281,7 @@ const Navbar = () => {
                 />
               )}
             </div>
-            <Link
+            {status=='unauthenticated'?<Link
               onClick={() => {
                 setQuery("");
                 setShows([]);
@@ -280,7 +290,20 @@ const Navbar = () => {
               className="account text-[14px] font-semibold flex items-center justify-center rounded-[4px] bg-[var(--netflix-font-red)] pt-1 pb-1 ps-2 pe-2 cursor-pointer hover:bg-[#c61414]"
             >
               Signin
-            </Link>
+            </Link>:
+            <div
+            onClick={() => {
+              if(status=='authenticated'){
+                signOut()
+              }
+              setQuery("");
+              setShows([]);
+            }}
+            className="account text-[14px] font-semibold flex items-center justify-center rounded-[4px] bg-[var(--netflix-font-red)] pt-1 pb-1 ps-2 pe-2 cursor-pointer hover:bg-[#c61414]"
+          >
+            {status=='authenticated'?'Logout':'Signin'}
+          </div>
+            }
           </div>
         </div>
       </div>
