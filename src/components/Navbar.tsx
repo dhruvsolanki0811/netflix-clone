@@ -12,7 +12,7 @@ import { AiOutlineRise } from "react-icons/ai";
 import { twMerge } from "tailwind-merge";
 import { IoSearch } from "react-icons/io5";
 import Link from "next/link";
-import { IoMdHome } from "react-icons/io";
+import { IoMdHome, IoMdLink, IoMdList } from "react-icons/io";
 import { PiTelevisionSimpleFill } from "react-icons/pi";
 import { MdLocalMovies } from "react-icons/md";
 
@@ -24,6 +24,7 @@ import axios from "axios";
 import { Show } from "@/types/type";
 import { useQuery } from "react-query";
 import { signOut, useSession } from "next-auth/react";
+import { FaCheck } from "react-icons/fa";
 
 const searchQuery = async ({ queryKey }: any) => {
   const query = queryKey[1];
@@ -193,6 +194,19 @@ const Navbar = () => {
                       <AiOutlineRise className="text-[1.1rem]"></AiOutlineRise>
                       <div className="nav-link cursor-pointer text-[0.9rem] ">
                         New & Popular
+                      </div>
+                    </Link>
+                    <Link
+                      onClick={() => {
+                        setQuery("");
+                        setShows([]);
+                      }}
+                      href={"/mylist"}
+                      className="w-full flex items-center gap-1 hover:bg-[#647080] pt-1 pb-1"
+                    >
+                      <IoMdList className="text-[1.1rem]"/>
+                      <div className="nav-link cursor-pointer text-[0.9rem] ">
+                        My List
                       </div>
                     </Link>
                   </div>
