@@ -13,7 +13,7 @@ function CarouselCard({show}:{show:Show}) {
         onClick={() =>{setOpen(true)
         setShow(show)
         }}
-        className="card-container cursor-pointer min-w-[11rem] h-[11rem] relative  text-black  transition-all	 hover:scale-110 "
+        className="card-container cursor-pointer min-w-[11rem] h-[15rem] relative  text-black  transition-all	 hover:scale-110 "
       >
         <img
           src={

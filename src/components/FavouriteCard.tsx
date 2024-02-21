@@ -10,7 +10,7 @@ function FavouriteCard({show}:{show:Show}) {
     <>
       <div onClick={()=>{setOpen(true)
       setShow(show)
-      }} className="card-container cursor-pointer h-[11rem] hover:scale-110 relative bg- text-black border-none">
+      }} className="card-container cursor-pointer h-[20rem] w-[14rem] hover:scale-110 relative bg- text-black border-none">
         <img
           src={
             show?.backdrop_path?
@@ -19,7 +19,7 @@ function FavouriteCard({show}:{show:Show}) {
           }
           
           alt=""
-          style={{objectFit:"cover",width:"100%",height:"100%",position:"absolute"}}
+          style={{objectFit:"fill",width:"100%",height:"100%",position:"absolute"}}
           />
       </div>
     </>
