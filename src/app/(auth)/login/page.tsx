@@ -2,7 +2,6 @@
 import SearchGrid from "@/components/SearchGrid";
 import { useSearchStore } from "@/store/searchstore";
 import React from "react";
-import { FaGoogle } from "react-icons/fa";
 import { signIn } from "next-auth/react"
 import {WithoutAuth} from "@/components/HOC/WithoutAuth"
 import { FcGoogle } from "react-icons/fc";

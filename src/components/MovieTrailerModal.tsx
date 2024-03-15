@@ -1,4 +1,5 @@
 "use client";
+import { AnimatePresence, motion } from "framer-motion";
 import { useModalStore } from "@/store/modalStore";
 import React, { useEffect, useRef, useState } from "react";
 import { FaPlay } from "react-icons/fa";
@@ -19,22 +20,26 @@ import {
   useRemoveFavShow,
 } from "@/hooks/useFavShowsData";
 import { useSession } from "next-auth/react";
+import Loader from "./Loader";
+import { FiLoader } from "react-icons/fi";
+import { TbLoaderQuarter } from "react-icons/tb";
+import { LuLoader2 } from "react-icons/lu";
 
 function MovieTrailerModal() {
   const { setOpen, show } = useModalStore();
-  const {
-    data: trailer,
-    isError,
-    isLoading,
-  } = useFetchMovieTrailer(
+  const { data: trailer, isLoading } = useFetchMovieTrailer(
     String(show?.id),
     show?.media_type ? show.media_type : ""
   );
   const { data: favstatus, isLoading: statusLoading } = useFetchFavShowStatus(
     String(show?.id)
   );
-  const { mutate: addFavShow } = useAddFavShow(String(show?.id));
-  const { mutate: removeShow } = useRemoveFavShow(String(show?.id));
+  const { mutate: addFavShow, isLoading: addListLoader } = useAddFavShow(
+    String(show?.id)
+  );
+  const { mutate: removeShow, isLoading: removeListLoader } = useRemoveFavShow(
+    String(show?.id)
+  );
   const { status: authStatus } = useSession();
   const modalRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLDivElement>(null);
@@ -57,33 +62,43 @@ function MovieTrailerModal() {
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick);
   }, []);
-
   return (
     <>
       <div className="trailer-modal fixed  bg-[rgb(0,0,0,60%)] inset-0  z-[1000] flex justify-center items-center">
-        <div
+        <motion.div
+          initial={{ x: 50 }}
+          animate={{ x: 0 }}
+          exit={{ x: 50 }}
           ref={modalRef}
           className="trailer-container grid grid-rows-3 relative aspect-video  h-[40rem] w-[42rem] ms-[1rem] me-[1rem] bg-[var(--background)]"
         >
           <div className="row-span-2 relative">
             <div className="black-shade  absolute inset-0 z-[10000]  w-full h-full bg-black/10 bg-gradient-to-b from-neutral-900/10 to-neutral-900"></div>
-            <ReactPlayer
-              style={{}}
-              url={
-                !isError && !isLoading && trailer
-                  ? `https://www.youtube.com/watch?v=${trailer?.key}`
-                  : ""
-              }
-              width="100%"
-              height="100%"
-              controls={false}
-              muted={isMuted}
-              playing={isPlaying}
-              onStart={() => setIsPlaying(true)}
-              onPlay={() => setIsPlaying(true)}
-              onPause={() => setIsPlaying(false)}
-              onEnded={() => setIsPlaying(false)}
-            />
+            {isLoading ? (
+              <div className="w-full h-full flex items-center justify-center">
+                <Loader></Loader>
+              </div>
+            ) : !trailer ? (
+              <div className="w-full h-full flex items-center justify-center">
+                <div className="text-[22px] font-bold">
+                  Trailer Not Found Sorry T_T
+                </div>
+              </div>
+            ) : (
+              <ReactPlayer
+                style={{}}
+                url={`https://www.youtube.com/watch?v=${trailer?.key}`}
+                width="100%"
+                height="100%"
+                controls={false}
+                muted={isMuted}
+                playing={isPlaying}
+                onStart={() => setIsPlaying(true)}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
+              />
+            )}
             <div className="btn-container grid grid-rows-2 absolute z-[20000] top-0 w-full h-full ">
               <div className="close-btn-container flex justify-end items-start pt-7 pe-4 ">
                 <div
@@ -98,7 +113,9 @@ function MovieTrailerModal() {
                   <div className="banner-play flex justify-between items-center  gap-1">
                     <div className="play-btn-container flex gap-2">
                       <div
-                        onClick={() => setIsPlaying(!isPlaying)}
+                        onClick={() => {
+                          if (trailer) setIsPlaying(!isPlaying);
+                        }}
                         className="play-btn cursor-pointer text-[14px] flex pt-1 pb-1 ps-3 pe-3 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white"
                       >
                         {!isPlaying ? (
@@ -117,13 +134,15 @@ function MovieTrailerModal() {
                       {authStatus == "unauthenticated" ? (
                         <Link
                           href={"/login"}
-                          className="add-btn cursor-pointer text-[14px] rounded-full  flex pt-1 pb-1 ps-2 pe-2 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white"
+                          className="add-btn cursor-pointer text-[14px] rounded-full  flex pt-2 pb-2 ps-2 pe-2 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white"
                         >
                           <MdAdd className="text-[14px]" />
                         </Link>
-                      ) : statusLoading ? (
-                        <div className="add-btn cursor-pointer text-[14px] rounded-full  flex pt-1 pb-1 ps-2 pe-2 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white">
-                          <MdAdd className="text-[14px]" />
+                      ) : statusLoading ||
+                        addListLoader ||
+                        removeListLoader ? (
+                        <div className="add-btn  cursor-pointer text-[14px] rounded-full  flex pt-2 pb-2 ps-2 pe-2 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white">
+                          <LuLoader2 className="animate-spin duration-2000 text-[14px]" />
                         </div>
                       ) : !favstatus.isPresent ? (
                         <div
@@ -158,7 +177,7 @@ function MovieTrailerModal() {
                               });
                             }
                           }}
-                          className="add-btn cursor-pointer text-[14px] rounded-full  flex pt-1 pb-1 ps-2 pe-2 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white"
+                          className="add-btn cursor-pointer text-[14px] rounded-full  flex pt-2 pb-2 ps-2 pe-2 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white"
                         >
                           <MdAdd className="text-[14px]" />
                         </div>
@@ -169,7 +188,7 @@ function MovieTrailerModal() {
                               removeShow(String(show?.id));
                             }
                           }}
-                          className="add-btn cursor-pointer text-[14px] rounded-full  flex pt-1 pb-1 ps-2 pe-2 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white"
+                          className="add-btn cursor-pointer text-[14px] rounded-full  flex pt-2 pb-2 ps-2 pe-2 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white"
                         >
                           <FaCheck className="text-[14px]" />
                         </div>
@@ -232,7 +251,7 @@ function MovieTrailerModal() {
               </Link>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </>
   );

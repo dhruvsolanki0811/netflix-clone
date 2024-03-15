@@ -55,7 +55,7 @@ function Page() {
             width={100}
             height={100}
             alt=""
-            className="hover:scale-110 cursor-pointer"
+            className="hover:scale-110 transition-transform duration-300 ease-in-out transform   cursor-pointer"
           />
         </div>
 

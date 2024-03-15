@@ -1,16 +1,12 @@
 "use client";
-import MoviePlayer from "@/components/MoviePlayer";
 import MovieTrailerModal from "@/components/MovieTrailerModal";
-import Navbar from "@/components/Navbar";
 import { useModalStore } from "@/store/modalStore";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { twMerge } from "tailwind-merge";
 import { useSearchStore } from "@/store/searchstore";
-import SearchImageCard from "@/components/SearchImageCard";
 import { fetchSeasonsDetails, useFetchSingleShow } from "@/hooks/useShowData";
 import { useQueries } from "react-query";
 import { Season } from "@/types/type";
@@ -113,7 +109,7 @@ function Page() {
               width={100}
               height={100}
               alt=""
-              className="hover:scale-110 cursor-pointer"
+              className="hover:scale-110 transition-transform duration-300 ease-in-out transform   cursor-pointer"
             />
           </div>
 
@@ -219,7 +215,7 @@ function Page() {
                       width={100}
                       height={100}
                       alt=""
-                      className="hover:scale-110 cursor-pointer"
+                      className="hover:scale-110 transition-transform duration-300 ease-in-out transform  cursor-pointer"
                     />
                   </div>
                 </div>
