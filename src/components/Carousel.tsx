@@ -29,7 +29,7 @@ const Carousel = ({shows,title}:{title:string,shows:Show[]}) => {
       }
   return (
     <>
-      <section className="Carousel of videos ms-[1.5rem] mt-7 mb-7  me-[1.5rem] ps-3 ">
+      <section className="Carousel of videos ms-[1.5rem] mt-7 mb-7  pe-[1.5rem] ps-[1rem] max-sm:ms-[1.4rem] max-sm:me-[0.8rem] max-sm:px-0  ">
         <h1 className="mb-2 text-[1.2rem] font-semibold">{title}</h1>
         <div className="group relative" onMouseEnter={()=>setshowBtn(true)} onMouseLeave={()=>setshowBtn(false)}>
         {showBtn &&  <>

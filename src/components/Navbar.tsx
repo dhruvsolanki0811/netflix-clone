@@ -123,7 +123,7 @@ const Navbar = () => {
           isScrolled ? "bg-[#171717]" : "bg-transparent"
         )}
       >
-        <div className="nav-container flex justify-between   ps-[3rem] pe-[3rem]  pt-[0.1rem] pb-[0.5rem] font-bold	text-[2rem]">
+        <div className="nav-container flex justify-between   ps-[1.5rem] pe-[1.5rem] max-sm:px-[0.7rem]  pt-[0.1rem] pb-[0.5rem] font-bold	text-[2rem]">
           <div className="logo-menu-container flex justify-center items-center flex-nowrap gap-2">
             <Link
               href={"/"}
@@ -270,7 +270,7 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
-
+          
           <div className="navitems nav-icons  flex items-center gap-3 ">
             <div
               ref={searchIconRef}
@@ -281,7 +281,7 @@ const Navbar = () => {
             >
               <IoSearch
                 onClick={() => {
-                  setShowSearchBox(true);  
+                  setShowSearchBox(!showSearchBox);  
                 }}
               />
               {showSearchBox && (
@@ -291,7 +291,7 @@ const Navbar = () => {
                   placeholder="Search"
                   value={query}
                   onChange={handleSearchChange}
-                  className="search-input-container bg-transparent outline-none  w-[10rem] h-[1.9rem] font-light text-[1rem] text-white flex items-center"
+                  className="search-input-container bg-transparent outline-none  w-[10rem] max-sm:w-[5rem] h-[1.9rem] font-light text-[1rem] text-white flex items-center"
                 />
               )}
             </div>

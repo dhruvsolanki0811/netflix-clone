@@ -11,7 +11,7 @@ function Banner({show}:{show:Show}) {
   return (
     <>
     <div className="banner w-full h-100 ">
-        <div className="movie-info flex flex-col gap-2 max-w-[50vw]  mt-[4rem] mb-[3.4rem]  ms-[2.5rem] me-[2.5rem]">
+        <div className="movie-info flex flex-col gap-2 max-w-[50vw]  mt-[4rem] mb-[3.4rem]  ms-[2.5rem] me-[2.5rem] max-sm:ms-[1.4rem] max-sm:me-[0.9rem]">
           <div className="movie-title text-[1.9rem] font-extrabold">
           {show?.title?show.title:(show?.name?show.name:(show?.original_title?show.original_title:"N/A"))}
           </div>
