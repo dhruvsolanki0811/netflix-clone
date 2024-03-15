@@ -188,7 +188,7 @@ const Navbar = () => {
                         setQuery("");
                         setShows([]);
                       }}
-                      href={"/new&popular"}
+                      href={"/new-popular"}
                       className="w-full flex items-center gap-1 hover:bg-[#647080] pt-1 pb-1"
                     >
                       <AiOutlineRise className="text-[1.1rem]"></AiOutlineRise>
@@ -253,7 +253,7 @@ const Navbar = () => {
                   setQuery("");
                   setShows([]);
                 }}
-                href={"/new&popular"}
+                href={"/new-popular"}
                 className="nav-link cursor-pointer hover:text-[#647080]"
               >
                 New & Popular

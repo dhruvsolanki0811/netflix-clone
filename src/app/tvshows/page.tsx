@@ -16,31 +16,31 @@ function Page() {
   const allShowsByCategory: CategorizedShows[] = [ 
     {
       title: "Trending Shows",
-      shows: trendingShows || []
+      shows: trendingShows 
     },
     {
       title: "Toprated Shows",
-      shows: topratedShows || []
+      shows: topratedShows 
     },
     {
       title: "Comedy Shows",
-      shows: comedyShows || []
+      shows: comedyShows 
     },
     {
       title: "Action & Adventures Shows",
-      shows: aaShows || []
+      shows: aaShows 
     },
     {
       title: "Documentary Shows",
-      shows: documentaryShows || []
+      shows: documentaryShows 
     },
     {
       title: "Animated Shows",
-      shows: animatedShows || []
+      shows: animatedShows 
     },
     {
       title: "Crime Shows",
-      shows: crimeShows || []
+      shows: crimeShows 
     },
 
   ]

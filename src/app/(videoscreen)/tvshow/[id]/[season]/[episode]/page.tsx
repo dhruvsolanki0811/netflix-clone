@@ -17,9 +17,11 @@ import { Season } from "@/types/type";
 import Link from "next/link";
 import ShowPlayer from "@/components/ShowPlayer";
 import SearchGrid from "@/components/SearchGrid";
+import Loader from "@/components/Loader";
+import { ToastContainer, toast } from "react-toastify";
 
 function Page() {
-  const { id, season, episode:episodeNumber } = useParams();
+  const { id, season, episode: episodeNumber } = useParams();
   const { setQuery, query, shows: queryShows } = useSearchStore();
   const [ShowId, setShowId] = useState(Array.isArray(id) ? id[0] : id);
   // const [seasons,setSeasons] = useState<Season[]>([])
@@ -66,25 +68,41 @@ function Page() {
   const { open, setOpen, setShow } = useModalStore();
 
   useEffect(() => {
+    toast.warning(
+      "Due to 3rd party library beaware of ads while streaming. Enjoy **Winks**!"
+    );
     setOpen(false);
-    setQuery("")
+    setQuery("");
   }, []);
 
   if (query.length > 0) {
     return (
       <>
-       <SearchGrid></SearchGrid>
+        <SearchGrid></SearchGrid>
       </>
     );
   }
   if (isLoading || queryResults.some((result) => result.isLoading)) {
-    return <>Loading</>;
+    return (
+      <>
+        {" "}
+        <ToastContainer theme="colored"></ToastContainer>
+        <div className="w-[100vw] h-[80vh] flex items-center justify-center ">
+          <Loader></Loader>
+        </div>
+      </>
+    );
   }
 
   if (seasons)
     return (
       <>
-        <ShowPlayer imdb={ShowId} season={parsedSeason} episode={parsedEpisodeNumber}></ShowPlayer>
+        <ToastContainer theme="colored"></ToastContainer>
+        <ShowPlayer
+          imdb={ShowId}
+          season={parsedSeason}
+          episode={parsedEpisodeNumber}
+        ></ShowPlayer>
         <div className="movie-info-container grid grid-cols-5	pt-8 mb-8">
           <div className="thumbnail-container flex flex-col font-bold justify-start items-end ">
             <img
@@ -154,35 +172,35 @@ function Page() {
               <div className="season-list  absolute z-[10] flex flex-col w-full bg-[var(--background)] cursor-pointer text-xs  flex-nowrap justify-center gap-1 font-bold border-[1px] border-solid ">
                 {Array.from(seasons.values())
                   .sort((a, b) => a.season_number - b.season_number)
-                  .map((season, a) => (
-                    (season.episodes.length==0 || !season.air_date )?<></>
-                    :
-                    <div
-                      onClick={() => setMenuSeason(season.season_number)}
-                      className={twMerge(
-                        "p-2",
-                        menuSeason == season.season_number &&
-                          "bg-[var(--netflix-font-red)]"
-                      )}
-                      key={a}
-                    >
-                      Season {season.season_number} 
-                    </div>
-                  ))}
+                  .map((season, a) =>
+                    season.episodes.length == 0 || !season.air_date ? (
+                      <></>
+                    ) : (
+                      <div
+                        onClick={() => setMenuSeason(season.season_number)}
+                        className={twMerge(
+                          "p-2",
+                          menuSeason == season.season_number &&
+                            "bg-[var(--netflix-font-red)]"
+                        )}
+                        key={a}
+                      >
+                        Season {season.season_number}
+                      </div>
+                    )
+                  )}
               </div>
             )}
           </div>
           <div className="episode-list min-w-[60vw] w-[65vw]  mt-5  ">
-            {
-            seasons.get(menuSeason)?.episodes.map((episode, a) => (
+            {seasons.get(menuSeason)?.episodes.map((episode, a) => (
               <Link
-              href={`/tvshow/${show?.id}/${episode.season_number}/${episode.episode_number  }`}
+                href={`/tvshow/${show?.id}/${episode.season_number}/${episode.episode_number}`}
                 key={a}
-                
-                className={
-                  twMerge(
+                className={twMerge(
                   "w-full grid grid-cols-7 cursor-pointer h-[14vh] justify-center items-center hover:bg-[black]",
-                  ((episode.episode_number == menuEP )&& (parsedSeason==episode.season_number))
+                  episode.episode_number == menuEP &&
+                    parsedSeason == episode.season_number
                     ? "border-[1px] border-white bg-black"
                     : ""
                 )}
@@ -190,7 +208,8 @@ function Page() {
                 <div className="ep-thumbnail  col-span-2  flex flex-col flex-nowrap font-bold  ">
                   <div className="image-container w-full  h-[10vh] flex gap-2 justify-center relative ps-2 pe-2 overflow-hidden">
                     <div className="number flex h-full  ">
-                      {episode.episode_number}</div>
+                      {episode.episode_number}
+                    </div>
                     <img
                       style={{
                         objectFit: "cover",

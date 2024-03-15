@@ -20,27 +20,27 @@ function Page() {
       const allShowsByCategory: CategorizedShows[] = [
         {
           title: "Trending Movies",
-          shows: trendingMovies || []
+          shows: trendingMovies 
         },
         {
           title: "Top Rated Movies",
-          shows: topRatedMovies || []
+          shows: topRatedMovies 
         },
         {
           title: "Action Movies",
-          shows: actionMovies || []
+          shows: actionMovies 
         },
         {
           title: "Comedy Movies",
-          shows: comedyMovies || []
+          shows: comedyMovies 
         },
         {
           title: "Thrillers",
-          shows: thrillerMovies || []
+          shows: thrillerMovies
         },
         {
           title: "Documentaries",
-          shows: documentaryMovies || []
+          shows: documentaryMovies
         },
         
         

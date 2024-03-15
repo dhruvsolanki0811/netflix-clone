@@ -13,11 +13,11 @@ function Page() {
     
     {
       title:"Popular Movies",
-      shows:popMovies||[]
+      shows:popMovies
     },
     {
       title:"Popular Shows",
-      shows:popShows||[]
+      shows:popShows
     },
   ]
   return (

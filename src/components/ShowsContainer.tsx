@@ -17,7 +17,6 @@ function ShowsContainer({
 }) {
   const { open } = useModalStore();
   const { query, shows: queryShows, setQuery } = useSearchStore();
-  const [randomInt, setRandomInt] = useState<number>(getRandomInt(15));
 
   useEffect(() => {
     setQuery("");
@@ -38,12 +37,12 @@ function ShowsContainer({
     <>
       {open && <MovieTrailerModal></MovieTrailerModal>}
       {(
-        categorizedShows.length>0 && categorizedShows[0].shows.length>0 
+        categorizedShows.length>0  
       ) && (
           <>
             {path == "/" && (
               <>
-                <Banner show={categorizedShows[0].shows[randomInt]}></Banner>
+                <Banner shows={categorizedShows}></Banner>
               </>
             )}
 

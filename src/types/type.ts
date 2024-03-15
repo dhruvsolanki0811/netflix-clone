@@ -30,7 +30,7 @@ export type Show = {
 
 export type CategorizedShows = {
     title: string
-    shows: Show[]
+    shows?: Show[]
 }
 
 export type VideoResult = {
