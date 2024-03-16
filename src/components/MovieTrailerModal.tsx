@@ -9,9 +9,8 @@ import { FaVolumeMute } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaPause } from "react-icons/fa";
 import Link from "next/link";
-import { useQuery } from "react-query";
 import { useFetchMovieTrailer } from "@/hooks/useTrailerData";
-import { IoMdAdd } from "react-icons/io";
+
 import { FaCheck } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import {
@@ -21,8 +20,6 @@ import {
 } from "@/hooks/useFavShowsData";
 import { useSession } from "next-auth/react";
 import Loader from "./Loader";
-import { FiLoader } from "react-icons/fi";
-import { TbLoaderQuarter } from "react-icons/tb";
 import { LuLoader2 } from "react-icons/lu";
 
 function MovieTrailerModal() {
@@ -66,9 +63,9 @@ function MovieTrailerModal() {
     <>
       <div className="trailer-modal fixed  bg-[rgb(0,0,0,60%)] inset-0  z-[1000] flex justify-center items-center">
         <motion.div
-          initial={{ x: 50 }}
-          animate={{ x: 0 }}
-          exit={{ x: 50 }}
+          initial={{ y: 100 }}
+          animate={{ y: 0 }}
+          exit={{ y: -100 }}
           ref={modalRef}
           className="trailer-container grid grid-rows-3 relative aspect-video  h-[40rem] w-[42rem] ms-[1rem] me-[1rem] bg-[var(--background)]"
         >
