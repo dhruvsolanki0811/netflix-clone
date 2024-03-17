@@ -1,5 +1,5 @@
 "use client";
-import React, {  useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { useModalStore } from "@/store/modalStore";
 import { Show } from "@/types/type";
 import { twMerge } from "tailwind-merge";
@@ -7,13 +7,13 @@ import { twMerge } from "tailwind-merge";
 function CarouselCard({ show }: { show?: Show }) {
   const [imageLoaded, setimageLoaded] = useState(false);
   const { setOpen, setShow } = useModalStore();
-  // useEffect(() => {
-  //   const img = new Image();
-  //   img.src =
-  //     show && show.poster_path
-  //       ? `https://image.tmdb.org/t/p/original/${show.poster_path}`
-  //       : "";
-  // }, [show?.backdrop_path]);
+  useEffect(() => {
+    const img = new Image();
+    img.src =
+      show && show.poster_path
+        ? `https://image.tmdb.org/t/p/original/${show.poster_path}`
+        : "";
+  }, [show?.backdrop_path]);
   return (
     <>
       <div
@@ -34,7 +34,7 @@ function CarouselCard({ show }: { show?: Show }) {
               style={{ background:"#1d1d1d",width: "100%", height: "100%",display:imageLoaded?'none':'block' }}
             ></div> */}
             <img
-              src={`https://image.tmdb.org/t/p/w92/${show.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w45/${show.poster_path}`}
               onLoad={() => setimageLoaded(true)}
               alt="card"
               style={{
@@ -44,7 +44,6 @@ function CarouselCard({ show }: { show?: Show }) {
                 height: "100%",
                 position: "absolute",
                 display:imageLoaded?'none':'block' ,
-                transition:"display 200ms ease-in-out" 
                 
               }}
               loading="lazy"
@@ -59,7 +58,8 @@ function CarouselCard({ show }: { show?: Show }) {
                 width: "100%",
                 height: "100%",
                 position: "absolute",
-                display:!imageLoaded?'none':'block' 
+                display:!imageLoaded?'none':'block', 
+                transition:"display 200ms ease-in-out" 
 
               }}
               loading="lazy"
