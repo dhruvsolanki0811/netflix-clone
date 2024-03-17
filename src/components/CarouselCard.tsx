@@ -30,9 +30,26 @@ function CarouselCard({ show }: { show?: Show }) {
       >
         {show ? (
           <>
-            <div
+            {/* <div
               style={{ background:"#1d1d1d",width: "100%", height: "100%",display:imageLoaded?'none':'block' }}
-            ></div>
+            ></div> */}
+            <img
+              src={`https://image.tmdb.org/t/p/w92/${show.poster_path}`}
+              onLoad={() => setimageLoaded(true)}
+              alt="card"
+              style={{
+                objectFit: "cover",
+                backgroundPosition:"center",
+                width: "100%",
+                height: "100%",
+                position: "absolute",
+                display:imageLoaded?'none':'block' ,
+                transition:"display 200ms ease-in-out" 
+                
+              }}
+              loading="lazy"
+              
+            />
             <img
               src={`https://image.tmdb.org/t/p/original/${show.poster_path}`}
               onLoad={() => setimageLoaded(true)}
@@ -46,6 +63,7 @@ function CarouselCard({ show }: { show?: Show }) {
 
               }}
               loading="lazy"
+              
             />
           </>
         ) : (
