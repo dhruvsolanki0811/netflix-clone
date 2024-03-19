@@ -1,9 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 
-import Carousel from "./Carousel";
-import Image from "next/image";
 import { FaPlay, FaInfoCircle } from "react-icons/fa";
 import { useModalStore } from "@/store/modalStore";
 import { CategorizedShows, Show } from "@/types/type";
