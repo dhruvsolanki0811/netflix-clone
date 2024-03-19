@@ -35,7 +35,6 @@ function CarouselCard({ show }: { show?: Show }) {
             ></div> */}
             <img
               src={`https://image.tmdb.org/t/p/w45/${show.poster_path}`}
-              onLoad={() => setimageLoaded(true)}
               alt="card"
               style={{
                 objectFit: "cover",
