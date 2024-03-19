@@ -2,17 +2,16 @@
 import Loader from "@/components/Loader";
 import MoviePlayer from "@/components/MoviePlayer";
 import MovieTrailerModal from "@/components/MovieTrailerModal";
-import Navbar from "@/components/Navbar";
 import SearchGrid from "@/components/SearchGrid";
-import SearchImageCard from "@/components/SearchImageCard";
+import unknownPlaceholder from "../../../../assets/placeholder.jpg";
 import { useFetchSingleMovie } from "@/hooks/useMovieData";
 import { useModalStore } from "@/store/modalStore";
 import { useSearchStore } from "@/store/searchstore";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
+import Image from "next/image";
 
 function Page() {
   const { id } = useParams();
@@ -22,7 +21,9 @@ function Page() {
   const { data: show, isLoading } = useFetchSingleMovie(movieId);
   const { setOpen, open, setShow } = useModalStore();
   useEffect(() => {
-    toast.warning("Due to 3rd party library beaware of ads while streaming. Enjoy **Winks**!")
+    toast.warning(
+      "Due to 3rd party library beaware of ads while streaming. Enjoy **Winks**!"
+    );
     setOpen(false);
     setQuery("");
   }, []);
@@ -43,20 +44,33 @@ function Page() {
 
   return (
     <>
-    <ToastContainer theme="colored"></ToastContainer>
+      <ToastContainer theme="colored"></ToastContainer>
       <MoviePlayer imdb={movieId}></MoviePlayer>
       <div className="movie-info-container grid grid-cols-5	pt-8 mb-8">
         <div className="thumbnail-container flex flex-col font-bold justify-start items-end ">
-          <img
-            style={{
-              boxShadow: "19px 11px 15px -3px rgba(0,0,0,41%)",
-            }}
-            src={`https://image.tmdb.org/t/p/original/${show?.poster_path}`}
-            width={100}
-            height={100}
-            alt=""
-            className="hover:scale-110 transition-transform duration-300 ease-in-out transform   cursor-pointer"
-          />
+          {show?.poster_path ? (
+            <img
+              style={{
+                boxShadow: "19px 11px 15px -3px rgba(0,0,0,41%)",
+              }}
+              src={`https://image.tmdb.org/t/p/original/${show?.poster_path}`}
+              width={100}
+              height={100}
+              alt=""
+              className="hover:scale-110 transition-transform duration-300 ease-in-out transform   cursor-pointer"
+            />
+          ) : (
+            <Image
+              style={{
+                boxShadow: "19px 11px 15px -3px rgba(0,0,0,41%)",
+              }}
+              src={unknownPlaceholder}
+              width={100}
+              height={100}
+              alt=""
+              className="object-fill hover:scale-110 transition-transform duration-300 ease-in-out transform   cursor-pointer"
+            />
+          )}
         </div>
 
         <div className="movie-info col-span-4 flex flex-col  gap-2   ms-[2.5rem] me-[2.5rem]">

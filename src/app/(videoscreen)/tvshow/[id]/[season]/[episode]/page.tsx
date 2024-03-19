@@ -15,6 +15,8 @@ import ShowPlayer from "@/components/ShowPlayer";
 import SearchGrid from "@/components/SearchGrid";
 import Loader from "@/components/Loader";
 import { ToastContainer, toast } from "react-toastify";
+import unknownPlaceholder from "../../../../../../assets/placeholder.jpg";
+import Image from "next/image";
 
 function Page() {
   const { id, season, episode: episodeNumber } = useParams();
@@ -101,16 +103,29 @@ function Page() {
         ></ShowPlayer>
         <div className="movie-info-container grid grid-cols-5	pt-8 mb-8">
           <div className="thumbnail-container flex flex-col font-bold justify-start items-end ">
-            <img
-              style={{
-                boxShadow: "19px 11px 15px -3px rgba(0,0,0,41%)",
-              }}
-              src={`https://image.tmdb.org/t/p/original/${show?.poster_path}`}
-              width={100}
-              height={100}
-              alt=""
-              className="hover:scale-110 transition-transform duration-300 ease-in-out transform   cursor-pointer"
-            />
+            {show?.poster_path ? (
+              <img
+                style={{
+                  boxShadow: "19px 11px 15px -3px rgba(0,0,0,41%)",
+                }}
+                src={`https://image.tmdb.org/t/p/original/${show?.poster_path}`}
+                width={100}
+                height={100}
+                alt=""
+                className="hover:scale-110 transition-transform duration-300 ease-in-out transform   cursor-pointer"
+              />
+            ) : (
+              <Image
+                style={{
+                  boxShadow: "19px 11px 15px -3px rgba(0,0,0,41%)",
+                }}
+                src={unknownPlaceholder}
+                width={100}
+                height={100}
+                alt=""
+                className="hover:scale-110 transition-transform duration-300  ease-in-out transform   cursor-pointer"
+              />
+            )}
           </div>
 
           <div className="movie-info col-span-4 flex flex-col  gap-2   ms-[2.5rem] me-[2.5rem]">
@@ -206,17 +221,31 @@ function Page() {
                     <div className="number flex h-full  ">
                       {episode.episode_number}
                     </div>
-                    <img
-                      style={{
-                        objectFit: "cover",
-                        boxShadow: "19px 11px 15px -3px rgba(0,0,0,41%)",
-                      }}
-                      src={`https://image.tmdb.org/t/p/original/${episode.still_path}`}
-                      width={100}
-                      height={100}
-                      alt=""
-                      className="hover:scale-110 transition-transform duration-300 ease-in-out transform  cursor-pointer"
-                    />
+                    {!episode.still_path ? (
+                      <Image
+                        style={{
+                          objectFit: "cover",
+                          boxShadow: "19px 11px 15px -3px rgba(0,0,0,41%)",
+                        }}
+                        src={unknownPlaceholder}
+                        width={100}
+                        height={100}
+                        alt=""
+                        className="hover:scale-110 transition-transform duration-300 ease-in-out transform  cursor-pointer"
+                      />
+                    ) : (
+                      <img
+                        style={{
+                          objectFit: "cover",
+                          boxShadow: "19px 11px 15px -3px rgba(0,0,0,41%)",
+                        }}
+                        src={`https://image.tmdb.org/t/p/original/${episode.still_path}`}
+                        width={100}
+                        height={100}
+                        alt=""
+                        className="hover:scale-110 transition-transform duration-300 ease-in-out transform  cursor-pointer"
+                      />
+                    )}
                   </div>
                 </div>
                 <div className="episode-info col-span-5 flex flex-col p-3 ">

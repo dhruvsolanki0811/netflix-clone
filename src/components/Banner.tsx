@@ -31,62 +31,71 @@ function Banner({ shows }: { shows?: CategorizedShows[] }) {
             </div>
           ) : (
             <div className="movie-title h-[1.9rem]  font-extrabold">
-              <div
-                className="h-[1rem] w-[50%] bg-[#1d1d1d]"></div>
+              <div className="h-[1rem] w-[50%] bg-[#1d1d1d]"></div>
             </div>
           )}
-          <div className="popularity-tab flex flex-nowrap	 gap-2 justify-cener items-center">
-            {bannerShow.vote_average?<div className="popularity text-[#16A34A] text-sm font-medium	 ">
-              {bannerShow?.vote_average} Average Votes
-            </div>:
-            <div className="movie-title h-[1.9rem] w-[24%] font-extrabold">
-            <div
-              className="h-[1rem] w-full bg-[#1d1d1d]"></div>
-          </div>}
-            {bannerShow.release_date?<div className="popularity text-sm font-medium">
-              {bannerShow?.release_date}
-            </div>:
-            <div className="movie-title h-[1.9rem] w-[24%] font-extrabold">
-            <div
-              className="h-[1rem] w-full bg-[#1d1d1d]"></div>
-          </div>}
-          </div>
-          {bannerShow.overview?<div className="movie-title text-sm text-justify multi-line-ellipsis">
-            {bannerShow?.overview}
+          {bannerShow.release_date?<div className="popularity-tab flex flex-nowrap	 gap-2 justify-cener items-center">
+            {(
+              <div className="popularity text-[#16A34A] text-sm font-medium	 ">
+                {bannerShow.vote_average} Average Votes
+              </div>
+            ) }
+            {bannerShow.release_date ? (
+              <div className="popularity text-sm font-medium">
+                {bannerShow?.release_date}
+              </div>
+            ) : (
+              <div className="movie-title h-[1.9rem] w-[24%] font-extrabold">
+                <div className="h-[1rem] w-full bg-[#1d1d1d]"></div>
+              </div>
+            )}
           </div>:
-          <div className="movie-title  w-full font-extrabold">
-          <div
-            className="h-[4.3rem] w-full bg-[#1d1d1d]"></div>
+          <div className="movie-title h-[1.9rem] w-[100%] font-extrabold">
+          <div className="h-[1rem] w-full bg-[#1d1d1d]"></div>
         </div>}
+          {bannerShow.overview ? (
+            <div className="movie-title text-sm text-justify multi-line-ellipsis">
+              {bannerShow?.overview}
+            </div>
+          ) : (
+            <div className="movie-title  w-full font-extrabold">
+              <div className="h-[4.3rem] w-full bg-[#1d1d1d]"></div>
+            </div>
+          )}
           <div className="banner-play flex gap-1">
-            {bannerShow.title?<Link
-              href={
-                bannerShow?.id && bannerShow?.media_type == "tv"
-                  ? `/tvshow/${bannerShow.id}/1/1`
-                  : `/movie/${bannerShow?.id}`
-              }
-              className="play-btn cursor-pointer text-[14px] flex pt-1 pb-1 ps-3 pe-3 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white"
-            >
-              <FaPlay className="text-[12px]"></FaPlay>
-              Watch
-            </Link>:
-            <div className="movie-title h-[1.9rem]  font-extrabold">
-            <div
-              className="h-[31px] w-[84px] bg-[#1d1d1d]"></div>
-          </div>}
-            {bannerShow.title?<div
-              onClick={() => {
-                setOpen(true);
-                setShow(bannerShow);
-              }}
-              className="play-btn cursor-pointer text-[14px] flex flex-nowrap pt-1 pb-1 ps-3 pe-3 gap-1 justify-center items-center font-bold  mt-2 text-black bg-transparent text-white rounded-[3px] border-[1px] border-solid border-[var(--border-btn)] hover:bg-[var(--border-btn)]"
-            >
-              <FaInfoCircle className="text-[14px] "></FaInfoCircle>
-              More Info
-            </div>:<div className="movie-title h-[1.9rem]  font-extrabold">
+            {bannerShow.title ? (
+              <Link
+                href={
+                  bannerShow?.id && bannerShow?.media_type == "tv"
+                    ? `/tvshow/${bannerShow.id}/1/1`
+                    : `/movie/${bannerShow?.id}`
+                }
+                className="play-btn cursor-pointer text-[14px] flex pt-1 pb-1 ps-3 pe-3 gap-1 justify-center items-center font-bold  mt-2 text-black bg-white  border-[1px] border-solid border-[white] rounded-[3px] hover:bg-[var(--border-btn)] hover:border-[var(--border-btn)] hover:text-white"
+              >
+                <FaPlay className="text-[12px]"></FaPlay>
+                Watch
+              </Link>
+            ) : (
+              <div className="movie-title h-[1.9rem]  font-extrabold">
+                <div className="h-[31px] w-[84px] bg-[#1d1d1d]"></div>
+              </div>
+            )}
+            {bannerShow.title ? (
               <div
-                className="h-[31px] w-[110px] bg-[#1d1d1d]"></div>
-            </div>}
+                onClick={() => {
+                  setOpen(true);
+                  setShow(bannerShow);
+                }}
+                className="play-btn cursor-pointer text-[14px] flex flex-nowrap pt-1 pb-1 ps-3 pe-3 gap-1 justify-center items-center font-bold  mt-2 text-black bg-transparent text-white rounded-[3px] border-[1px] border-solid border-[var(--border-btn)] hover:bg-[var(--border-btn)]"
+              >
+                <FaInfoCircle className="text-[14px] "></FaInfoCircle>
+                More Info
+              </div>
+            ) : (
+              <div className="movie-title h-[1.9rem]  font-extrabold">
+                <div className="h-[31px] w-[110px] bg-[#1d1d1d]"></div>
+              </div>
+            )}
           </div>
         </div>
         <div className="banner-inset absolute inset-0 -z-10 ">
