@@ -15,7 +15,7 @@ function CarouselCard({ show }: { show?: Show }) {
     <div
       onClick={handleCardClick}
       className={twMerge(
-        "card-container cursor-pointer min-w-[11rem] h-[16rem] relative text-black",
+        "card-container cursor-pointer min-w-[11rem] h-[15.5rem] relative text-black",
         show
           ? " transition-all	 hover:scale-110 transition-transform duration-300 ease-in-out transform  "
           : ""
@@ -31,7 +31,7 @@ function CarouselCard({ show }: { show?: Show }) {
             alt="card"
             style={{
               objectFit: "fill",
-              height: "16rem",
+              height: "15.5rem",
               minWidth: "11rem",
               borderRadius: "none",
             }}
