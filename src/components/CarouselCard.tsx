@@ -6,7 +6,6 @@ import { Image } from "@nextui-org/image";
 
 function CarouselCard({ show }: { show?: Show }) {
   const { setOpen, setShow } = useModalStore();
-  const [imageLoaded,setImageLoaded]=useState(false)
   const handleCardClick = () => {
     setOpen(true);
     setShow(show ? show : ({} as Show));
@@ -23,23 +22,27 @@ function CarouselCard({ show }: { show?: Show }) {
       )}
     >
       {show ? (
-        <Image
-        isBlurred
-        isZoomed
-          src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
-          alt="card"
-          style={{
-            objectFit: "fill",
-            height: "16rem",
-            minWidth: "11rem",
-            borderRadius: "none",
-          }}
-          width="100%"
-          shadow="sm"
-          radius="none"
-          className="absolute"
-          loading="lazy"
-        />
+        <>
+
+          <Image
+            src={`https://image.tmdb.org/t/p/w185/${show.poster_path}`}
+            fallbackSrc={`https://image.tmdb.org/t/p/w45/${show.poster_path}`}
+
+            alt="card"
+            style={{
+              objectFit: "fill",
+              height: "16rem",
+              minWidth: "11rem",
+              borderRadius: "none",
+            }}
+            width="100%"
+            shadow="sm"
+            radius="none"
+            className="absolute"
+            loading="lazy"
+
+          />
+          </>
       ) : (
         <div className="w-full h-full absolute bg-[#1d1d1d]"></div>
       )}
