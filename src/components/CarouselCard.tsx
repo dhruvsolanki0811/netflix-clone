@@ -6,6 +6,7 @@ import { Image } from "@nextui-org/image";
 
 function CarouselCard({ show }: { show?: Show }) {
   const { setOpen, setShow } = useModalStore();
+  const [imageLoaded,setImageLoaded]=useState(false)
   const handleCardClick = () => {
     setOpen(true);
     setShow(show ? show : ({} as Show));
@@ -24,7 +25,6 @@ function CarouselCard({ show }: { show?: Show }) {
       {show ? (
         <Image
         isBlurred
-        isLoading
         isZoomed
           src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
           alt="card"
